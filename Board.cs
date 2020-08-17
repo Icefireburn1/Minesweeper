@@ -24,6 +24,7 @@ namespace CST_227_Milestone
             }
         }
 
+        // Decide which cells will become live (bombs)
         public void setupLiveNeighbors(int difficulty)
         {
             Random ran = new Random();
@@ -39,9 +40,8 @@ namespace CST_227_Milestone
                 }
             }
         }
-        //***
-        //*X*
-        //***
+
+        // Generates the # of neighbors for each cell
         public void calculateLiveNeighbors()
         {
             int count;
