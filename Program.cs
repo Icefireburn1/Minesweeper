@@ -10,11 +10,11 @@ namespace CST_227_Milestone
             board = new Board(12);
             board.setupLiveNeighbors(5);
             board.calculateLiveNeighbors();
-            printHelper(board.Grid);
+            printBoard(board.Grid);
         }
 
         // Prints grid
-        private static void printHelper(Cell[,] grid)
+        private static void printBoard(Cell[,] grid)
         {
             // Header
             for (int x = 0; x < board.Size; x++)
