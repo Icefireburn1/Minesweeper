@@ -11,8 +11,8 @@ namespace CST_227_Milestone
         {
             bool defeat = false;
             bool victory = false;
-            board = new Board(5);
-            board.setupLiveNeighbors(5);
+            board = new Board(20);
+            board.setupLiveNeighbors(8);
             board.calculateLiveNeighbors();
 
             while (!defeat && !victory)
@@ -22,7 +22,11 @@ namespace CST_227_Milestone
                     continue;
 
                 Cell visitedCell = board.Grid[input[0], input[1]];  // Selected cell
-                visitedCell.Visited = true;
+
+                if (visitedCell.Neighbors > 0)
+                    visitedCell.Visited = true;
+                else
+                    board.floodFill(input[0], input[1]);
 
                 if (visitedCell.Live) defeat = true; // Player found a bomb and lost
                 if (victoryAchieved(board.Grid)) victory = true;
@@ -172,5 +176,6 @@ namespace CST_227_Milestone
 
             return true;
         }
+
     }
 }

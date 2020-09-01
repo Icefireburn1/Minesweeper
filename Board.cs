@@ -77,5 +77,18 @@ namespace CST_227_Milestone
                 }
             }
         }
+
+        public void floodFill(int row, int col)
+        {
+            if (row < 0 || row >= Size || col < 0 || col >= Size || Grid[row, col].Live || Grid[row, col].Visited || Grid[row, col].Neighbors > 0)
+                return;
+
+            Grid[row, col].Visited = true;
+
+            floodFill(row++, col);
+            floodFill(row--, col);
+            floodFill(row, col++);
+            floodFill(row, col--);
+        }
     }
 }
