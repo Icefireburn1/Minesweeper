@@ -1,0 +1,11 @@
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\bin\Debug\MilestoneGUI.exe.config
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\bin\Debug\MilestoneGUI.exe
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\bin\Debug\MilestoneGUI.pdb
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\obj\Debug\MilestoneGUI.csprojAssemblyReference.cache
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\obj\Debug\MilestoneGUI.Form2.resources
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\obj\Debug\MilestoneGUI.Properties.Resources.resources
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\obj\Debug\MilestoneGUI.csproj.GenerateResource.cache
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\obj\Debug\MilestoneGUI.csproj.CoreCompileInputs.cache
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\obj\Debug\MilestoneGUI.exe
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\obj\Debug\MilestoneGUI.pdb
+C:\Users\Justin\source\repos\MilestoneGUI\MilestoneGUI\obj\Debug\MilestoneGUI.Form1.resources
