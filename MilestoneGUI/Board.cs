@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CST_227_Milestone
+namespace MilestoneGUI
 {
-    class Board
+    public class Board
     {
         public int Size { get; set; }
         public Cell[,] Grid { get; set; }
@@ -85,10 +85,10 @@ namespace CST_227_Milestone
 
             Grid[row, col].Visited = true;
 
-            floodFill(row++, col);
-            floodFill(row--, col);
-            floodFill(row, col++);
-            floodFill(row, col--);
+            floodFill(row+1, col);
+            floodFill(row-1, col);
+            floodFill(row, col+1);
+            floodFill(row, col-1);
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.label1 = new System.Windows.Forms.Label();
             this.easyRadioButton = new System.Windows.Forms.RadioButton();
             this.moderateRadioButton = new System.Windows.Forms.RadioButton();
@@ -99,6 +100,7 @@
             this.Controls.Add(this.easyRadioButton);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.Text = "Select Level";
             this.ResumeLayout(false);

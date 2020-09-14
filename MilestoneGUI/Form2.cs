@@ -12,10 +12,8 @@ namespace MilestoneGUI
 {
     public partial class Form2 : Form
     {
-        private static int dimension = 0;
-        public static int Dimension { get => dimension; set => dimension = value; }
-
-        
+        public static Board board;
+ 
 
         public Form2()
         {
@@ -26,7 +24,7 @@ namespace MilestoneGUI
 
         private void playButton_Click(object sender, EventArgs e)
         {
-
+            int dimension = 0;
 
             if (easyRadioButton.Checked)
                 dimension = 8;
@@ -34,6 +32,10 @@ namespace MilestoneGUI
                 dimension = 16;
             else if (difficultRadioButton.Checked)
                 dimension = 24;
+
+            board = new Board(dimension);
+            board.setupLiveNeighbors(8);
+            board.calculateLiveNeighbors();
 
             Form1 gameForm = new Form1();
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace CST_227_Milestone
+namespace MilestoneGUI
 {
-    class Cell
+    public class Cell
     {
         public int Row { get; set; }
         public int Column { get; set; }
