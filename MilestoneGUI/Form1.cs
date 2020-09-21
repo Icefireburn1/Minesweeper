@@ -138,6 +138,10 @@ namespace MilestoneGUI
             // Defeat
             if (visitedCell.Live)
             {
+                // Show highscore form
+                Form4 highScore = new Form4();
+                highScore.Show();
+
                 MessageBox.Show("Game Over");
 
                 // Run code to reveal everything
@@ -145,17 +149,20 @@ namespace MilestoneGUI
                 {
                     for (int y = 0; y < Form2.board.Size; y++)
                     {
+                        // Bomb
                         if (Form2.board.Grid[x, y].Live)
                         {
                             Image bomb = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\mine.png");
                             btnGrid[x, y].Image = (Image)(new Bitmap(bomb, new Size(panel1.Width / Form2.board.Size, panel1.Width / Form2.board.Size))); // Resizes the image
                             btnGrid[x, y].BackColor = Color.Thistle;
                         }
+                        // Cells with neighbors
                         else if (Form2.board.Grid[x, y].Neighbors < 9 && Form2.board.Grid[x, y].Neighbors > 0)
                         {
                             btnGrid[x, y].Text = Form2.board.Grid[x, y].Neighbors.ToString();
                             btnGrid[x, y].BackColor = Color.Thistle;
                         }
+                        // Cells with no neighbors
                         else if (Form2.board.Grid[x, y].Neighbors == 0)
                         {
                             btnGrid[x, y].BackColor = Color.PowderBlue;
@@ -167,7 +174,7 @@ namespace MilestoneGUI
             // Victory
             if (victoryAchieved(Form2.board.Grid))
             {
-                MessageBox.Show("You Win!\n" + "Time elapsed: " + watch.Elapsed.TotalMilliseconds/1000 + " seconds");
+                ShowMyDialogBox();
                 watch.Stop();
 
                 // Run code to reveal bombs
@@ -184,6 +191,12 @@ namespace MilestoneGUI
                     }
                 }
             }
+        }
+
+        public void ShowMyDialogBox()
+        {
+            Form3 nameGetter = new Form3(watch);
+            nameGetter.Show();
         }
     }
 }

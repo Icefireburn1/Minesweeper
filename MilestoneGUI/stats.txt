@@ -1,0 +1,4 @@
+Bill,Easy,0.9989874
+Sam,Easy,0.4363633
+Ricardo,Easy,17.3552106
+Tommy,Easy,24.7017552

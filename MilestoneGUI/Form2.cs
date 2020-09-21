@@ -13,7 +13,13 @@ namespace MilestoneGUI
     public partial class Form2 : Form
     {
         public static Board board;
- 
+
+        private static int selectedDifficultyBoardSize;
+        public static int SelectedDifficultyBoardSize
+        {
+            get { return selectedDifficultyBoardSize; }
+        }
+
 
         public Form2()
         {
@@ -27,14 +33,24 @@ namespace MilestoneGUI
             int dimension = 0;
 
             if (easyRadioButton.Checked)
+            {
                 dimension = 8;
+                selectedDifficultyBoardSize = dimension;
+            }
             else if (moderateRadioButton.Checked)
+            {
                 dimension = 16;
+                selectedDifficultyBoardSize = dimension;
+            }
             else if (difficultRadioButton.Checked)
+            {
                 dimension = 24;
+                selectedDifficultyBoardSize = dimension;
+            }
+
 
             board = new Board(dimension);
-            board.setupLiveNeighbors(8);
+            board.setupLiveNeighbors(5);
             board.calculateLiveNeighbors();
 
             Form1 gameForm = new Form1();
