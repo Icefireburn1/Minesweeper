@@ -2,3 +2,8 @@ Bill,Easy,0.9989874
 Sam,Easy,0.4363633
 Ricardo,Easy,17.3552106
 Tommy,Easy,24.7017552
+Jake,Easy,19.1726413
+Justin,Easy,17.8331597
+Justin,Hard,42.9923037
+Justin,Easy,27.2742932
+Justin,Hard,25.9703001

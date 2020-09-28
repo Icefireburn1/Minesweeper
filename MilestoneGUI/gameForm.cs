@@ -11,12 +11,14 @@ using System.Windows.Forms;
 
 namespace MilestoneGUI
 {
-    public partial class Form1 : Form
+    public partial class gameForm : Form
     {
-        public Button[,] btnGrid = new Button[Form2.board.Size, Form2.board.Size];
+        public Button[,] btnGrid = new Button[difficultyForm.board.Size, difficultyForm.board.Size];
         public static Stopwatch watch = new Stopwatch();
+        
+        public static bool victory = false;
 
-        public Form1()
+        public gameForm()
         {
             InitializeComponent();
             populateGrid();
@@ -26,12 +28,12 @@ namespace MilestoneGUI
         public void populateGrid()
         {
             //this function will fill the panel1 control buttons
-            int buttonSize = panel1.Width / Form2.board.Size;
+            int buttonSize = panel1.Width / difficultyForm.board.Size;
             panel1.Height = panel1.Width;
 
-            for (int r = 0; r < Form2.board.Size; r++)
+            for (int r = 0; r < difficultyForm.board.Size; r++)
             {
-                for (int c = 0; c < Form2.board.Size; c++)
+                for (int c = 0; c < difficultyForm.board.Size; c++)
                 {
                     btnGrid[r, c] = new Button();
 
@@ -53,9 +55,9 @@ namespace MilestoneGUI
         // Has the player won yet?
         private static bool victoryAchieved(Cell[,] cell)
         {
-            for (int x = 0; x < Form2.board.Size; x++)
+            for (int x = 0; x < difficultyForm.board.Size; x++)
             {
-                for (int y = 0; y < Form2.board.Size; y++)
+                for (int y = 0; y < difficultyForm.board.Size; y++)
                 {
                     // If we found an unvisited non-bomb, we haven't won yet
                     if (!cell[x, y].Live && !cell[x, y].Visited)
@@ -89,7 +91,7 @@ namespace MilestoneGUI
             if (btnGrid[r, c].Image == null)
             {
                 Image flag = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\flag.png");
-                btnGrid[r, c].Image = (Image)(new Bitmap(flag, new Size(panel1.Width / Form2.board.Size, panel1.Width / Form2.board.Size))); // Resizes the image
+                btnGrid[r, c].Image = (Image)(new Bitmap(flag, new Size(panel1.Width / difficultyForm.board.Size, panel1.Width / difficultyForm.board.Size))); // Resizes the image
             }
             else
             {
@@ -100,13 +102,20 @@ namespace MilestoneGUI
 
         private void HandleLeftClick(object sender)
         {
+            if (victory)
+                return;
+
             Button btn = (Button)sender;
             string[] strArr = btn.Tag.ToString().Split('|');
             int r = int.Parse(strArr[0]);
             int c = int.Parse(strArr[1]);
 
-            Cell visitedCell = Form2.board.Grid[r, c];
+            Cell visitedCell = difficultyForm.board.Grid[r, c];
 
+            // Check for flag placed on cell, disallow clicking if flag is found
+            if (btnGrid[r, c].Image != null)
+                return;
+            
             if (visitedCell.Neighbors > 0 && !visitedCell.Live)
             {
                 visitedCell.Visited = true;
@@ -115,14 +124,14 @@ namespace MilestoneGUI
             }
             else if (visitedCell.Neighbors == 0)
             {
-                Form2.board.floodFill(r, c);
-                for (int i = 0; i < Form2.board.Size; i++)
+                difficultyForm.board.floodFill(r, c);
+                for (int i = 0; i < difficultyForm.board.Size; i++)
                 {
-                    for (int b = 0; b < Form2.board.Size; b++)
+                    for (int b = 0; b < difficultyForm.board.Size; b++)
                     {
-                        if (Form2.board.Grid[i, b].Visited)
+                        if (difficultyForm.board.Grid[i, b].Visited)
                         {
-                            if (Form2.board.Grid[i, b].Neighbors == 0)
+                            if (difficultyForm.board.Grid[i, b].Neighbors == 0)
                                 btnGrid[i, b].BackColor = Color.PowderBlue;
                         }
                     }
@@ -139,31 +148,31 @@ namespace MilestoneGUI
             if (visitedCell.Live)
             {
                 // Show highscore form
-                Form4 highScore = new Form4();
+                highscoreForm highScore = new highscoreForm();
                 highScore.Show();
 
                 MessageBox.Show("Game Over");
 
                 // Run code to reveal everything
-                for (int x = 0; x < Form2.board.Size; x++)
+                for (int x = 0; x < difficultyForm.board.Size; x++)
                 {
-                    for (int y = 0; y < Form2.board.Size; y++)
+                    for (int y = 0; y < difficultyForm.board.Size; y++)
                     {
                         // Bomb
-                        if (Form2.board.Grid[x, y].Live)
+                        if (difficultyForm.board.Grid[x, y].Live)
                         {
                             Image bomb = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\mine.png");
-                            btnGrid[x, y].Image = (Image)(new Bitmap(bomb, new Size(panel1.Width / Form2.board.Size, panel1.Width / Form2.board.Size))); // Resizes the image
+                            btnGrid[x, y].Image = (Image)(new Bitmap(bomb, new Size(panel1.Width / difficultyForm.board.Size, panel1.Width / difficultyForm.board.Size))); // Resizes the image
                             btnGrid[x, y].BackColor = Color.Thistle;
                         }
                         // Cells with neighbors
-                        else if (Form2.board.Grid[x, y].Neighbors < 9 && Form2.board.Grid[x, y].Neighbors > 0)
+                        else if (difficultyForm.board.Grid[x, y].Neighbors < 9 && difficultyForm.board.Grid[x, y].Neighbors > 0)
                         {
-                            btnGrid[x, y].Text = Form2.board.Grid[x, y].Neighbors.ToString();
+                            btnGrid[x, y].Text = difficultyForm.board.Grid[x, y].Neighbors.ToString();
                             btnGrid[x, y].BackColor = Color.Thistle;
                         }
                         // Cells with no neighbors
-                        else if (Form2.board.Grid[x, y].Neighbors == 0)
+                        else if (difficultyForm.board.Grid[x, y].Neighbors == 0)
                         {
                             btnGrid[x, y].BackColor = Color.PowderBlue;
                         }
@@ -172,20 +181,21 @@ namespace MilestoneGUI
             }
 
             // Victory
-            if (victoryAchieved(Form2.board.Grid))
+            if (victoryAchieved(difficultyForm.board.Grid))
             {
+                victory = true;
                 ShowMyDialogBox();
                 watch.Stop();
 
                 // Run code to reveal bombs
-                for (int x = 0; x < Form2.board.Size; x++)
+                for (int x = 0; x < difficultyForm.board.Size; x++)
                 {
-                    for (int y = 0; y < Form2.board.Size; y++)
+                    for (int y = 0; y < difficultyForm.board.Size; y++)
                     {
-                        if (Form2.board.Grid[x, y].Live)
+                        if (difficultyForm.board.Grid[x, y].Live)
                         {
                             Image bomb = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + "\\flag.png");
-                            btnGrid[x, y].Image = (Image)(new Bitmap(bomb, new Size(panel1.Width / Form2.board.Size, panel1.Width / Form2.board.Size))); // Resizes the image
+                            btnGrid[x, y].Image = (Image)(new Bitmap(bomb, new Size(panel1.Width / difficultyForm.board.Size, panel1.Width / difficultyForm.board.Size))); // Resizes the image
                             btnGrid[x, y].BackColor = Color.Thistle;
                         }
                     }
@@ -195,7 +205,7 @@ namespace MilestoneGUI
 
         public void ShowMyDialogBox()
         {
-            Form3 nameGetter = new Form3(watch);
+            recordResultForm nameGetter = new recordResultForm(watch);
             nameGetter.Show();
         }
     }

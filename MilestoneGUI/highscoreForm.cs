@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace MilestoneGUI
 {
-    public partial class Form4 : Form
+    public partial class highscoreForm : Form
     {
         private static List<PlayerStats> people = new List<PlayerStats>();
-        public Form4()
+        public highscoreForm()
         {
             InitializeComponent();
             LoadStatsFromFile();
@@ -23,15 +23,15 @@ namespace MilestoneGUI
                 p.GenerateScore();
             }
 
-            people.Sort();
+            // LINQ
+            var highscorePeople = (from p in people
+                                   orderby p.Score descending
+                                   select p).Take(5).ToList();
 
-            for (int i = 0; i < 5; i++)
+            int index = 0;
+            foreach(PlayerStats p in highscorePeople)
             {
-                if (people.Count <= i)
-                {
-                    break;
-                }
-                listBox1.Items.Add((i+1) + ". " + people[i]);
+                listBox1.Items.Add(++index + ". " + p.ToString());
             }
         }
 

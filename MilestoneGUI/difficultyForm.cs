@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MilestoneGUI
 {
-    public partial class Form2 : Form
+    public partial class difficultyForm : Form
     {
         public static Board board;
 
@@ -21,7 +21,7 @@ namespace MilestoneGUI
         }
 
 
-        public Form2()
+        public difficultyForm()
         {
             InitializeComponent();
         }
@@ -39,12 +39,12 @@ namespace MilestoneGUI
             }
             else if (moderateRadioButton.Checked)
             {
-                dimension = 16;
+                dimension = 10;
                 selectedDifficultyBoardSize = dimension;
             }
             else if (difficultRadioButton.Checked)
             {
-                dimension = 24;
+                dimension = 12;
                 selectedDifficultyBoardSize = dimension;
             }
 
@@ -53,7 +53,7 @@ namespace MilestoneGUI
             board.setupLiveNeighbors(5);
             board.calculateLiveNeighbors();
 
-            Form1 gameForm = new Form1();
+            gameForm gameForm = new gameForm();
 
             gameForm.Show();
             this.Hide();

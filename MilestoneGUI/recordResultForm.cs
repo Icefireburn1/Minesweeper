@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace MilestoneGUI
 {
-    public partial class Form3 : Form
+    public partial class recordResultForm : Form
     {
         private Stopwatch watch;
 
-        public Form3(Stopwatch watch)
+        public recordResultForm(Stopwatch watch)
         {
             InitializeComponent();
             label1.Text = "You Win!\n" + "Time elapsed: " + watch.Elapsed.TotalMilliseconds / 1000 + " seconds";
@@ -26,7 +26,7 @@ namespace MilestoneGUI
         private void button1_Click(object sender, EventArgs e)
         {
             AddResultToFile();
-            Form4 highScore = new Form4();
+            highscoreForm highScore = new highscoreForm();
             highScore.Show();
             this.Dispose();
         }
@@ -55,15 +55,15 @@ namespace MilestoneGUI
             }
 
             string difficulty = "Null";
-            switch (Form2.SelectedDifficultyBoardSize)
+            switch (difficultyForm.SelectedDifficultyBoardSize)
             {
                 case 8:
                     difficulty = "Easy";
                     break;
-                case 16:
+                case 10:
                     difficulty = "Moderate";
                     break;
-                case 24:
+                case 12:
                     difficulty = "Hard";
                     break;
             }
@@ -113,7 +113,7 @@ namespace MilestoneGUI
         private void CreateFirstEntry(string filePath)
         {
             string difficulty = "Null";
-            switch (Form2.SelectedDifficultyBoardSize)
+            switch (difficultyForm.SelectedDifficultyBoardSize)
             {
                 case 8:
                     difficulty = "Easy";
